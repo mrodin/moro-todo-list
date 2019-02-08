@@ -1,6 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { handleReceiveTodos } from '../actions/todos'
 
 class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleReceiveTodos())
+  }
+
   render() {
     return (
       <div className="App">
@@ -10,4 +16,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App)
