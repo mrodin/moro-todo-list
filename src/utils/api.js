@@ -1,12 +1,27 @@
-const GET_ALL_TODOS_ENDPOINT = 'http://localhost:8080/todos'
+const API_ENDPOINT = 'http://localhost:8080/todos'
 
-export async function getTodos() {
-  const result = await fetch(GET_ALL_TODOS_ENDPOINT)
+export function getTodos() {
+  return fetch(API_ENDPOINT)
+    .then(_handleErrors)
     .then(response => response.json())
-    .then(jsonData => _formatTodos(jsonData))
-    .then(formatted => ({todos: formatted}))
-      //  ({ todos: jsonData }))
-  return result
+    .then(jsonRaw => _formatTodos(jsonRaw))
+    .then(jsonFormatted => ({ todos: jsonFormatted }))
+    .catch(error => console.error('Error:', error))
+}
+
+export function saveTodo(text) {
+  var data = { text: text };
+
+  return fetch(API_ENDPOINT, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(_handleErrors)
+    .then(response => response.json())
+    .catch(error => console.error('Error:', error))
 }
 
 // Formats array of objects (response from API) to object containing
@@ -18,4 +33,13 @@ function _formatTodos(todos) {
     return obj
   }, {})
   return formattedTodos
+}
+
+// Handles possible HTTP error codes from API
+
+function _handleErrors(response) {
+  if (!response.ok) {
+    throw Error(response.statusText)
+  }
+  return response
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function Task(props) {
   return (
@@ -10,6 +11,10 @@ function Task(props) {
       </label>
     </div>
   )
+}
+
+Task.propTypes = {
+  task: PropTypes.object.isRequired
 }
 
 export default Task

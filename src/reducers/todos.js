@@ -1,4 +1,7 @@
-import { RECEIVE_TODOS } from '../actions/todos'
+import {
+  RECEIVE_TODOS,
+  ADD_TODO
+} from '../actions/todos'
 
 export default function todos(state = {}, action) {
   switch (action.type) {
@@ -6,6 +9,11 @@ export default function todos(state = {}, action) {
       return {
         ...state,
         ...action.todos,
+      }
+    case ADD_TODO:
+      return {
+        ...state,
+        [action.todo.id]: action.todo
       }
     default:
       return state
