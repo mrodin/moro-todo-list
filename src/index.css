@@ -1,14 +1,82 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background:
+    linear-gradient(40deg, transparent 40%, #9ab593),
+    linear-gradient(-40deg, #ba7461 20%, #593e4e 90%);
+  min-height: 100vh;
+  color: #ffffff;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+ul {
+  list-style: none;
 }
+
+/* Helpers */
+
+.flex {
+  display: flex;
+}
+
+.margin-bottom--small {
+  margin-bottom: 1rem;
+}
+
+/* App Component */
+
+.app {
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* TodoList Component */
+
+.todolist {
+  min-width: 500px;
+  background-color: rgba(0, 0, 0, .6);
+  padding: 10px 20px 40px;
+}
+
+.todolist__title {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #fff;
+  line-height: 1.2;
+  font-size: 2.2em;
+  font-weight: normal;
+}
+
+/* Input Component */
+
+.input__faAngleDown {
+  font-size: 36px
+}
+
+.input__container {
+  align-items: center;
+}
+
+.input__form {
+  width: 100%;
+  margin-left: 15px;  
+}
+
+.input__input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  color: #593e4e;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+/* Task Component */
+

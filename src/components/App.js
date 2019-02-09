@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleReceiveTodos } from '../actions/todos'
+import TodoList from './TodoList'
 
 class App extends Component {
   componentDidMount() {
@@ -9,8 +10,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        Starter React App
+      <div className="app flex">
+        <TodoList />
       </div>
     );
   }
