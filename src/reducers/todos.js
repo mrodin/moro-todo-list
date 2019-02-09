@@ -1,6 +1,7 @@
 import {
   RECEIVE_TODOS,
-  ADD_TODO
+  ADD_TODO,
+  SWITCH_TODO
 } from '../actions/todos'
 
 export default function todos(state = {}, action) {
@@ -14,6 +15,17 @@ export default function todos(state = {}, action) {
       return {
         ...state,
         [action.todo.id]: action.todo
+      }
+    case SWITCH_TODO:
+      const { id } = action
+      const todo = state[id]
+
+      return {
+        ...state,
+        [id]: {
+          ...todo,
+          completed: !todo.completed
+        }
       }
     default:
       return state

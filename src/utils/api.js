@@ -1,5 +1,6 @@
 const API_ENDPOINT = 'http://localhost:8080/todos'
 
+// Returns all todos
 export function getTodos() {
   return fetch(API_ENDPOINT)
     .then(_handleErrors)
@@ -9,12 +10,39 @@ export function getTodos() {
     .catch(error => console.error('Error:', error))
 }
 
+// Saves new todo with given text
 export function saveTodo(text) {
   var data = { text: text };
 
   return fetch(API_ENDPOINT, {
     method: 'POST',
     body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(_handleErrors)
+    .then(response => response.json())
+    .catch(error => console.error('Error:', error))
+}
+
+// Checks todo (completed)
+export function checkTodo(id) {
+  return fetch(API_ENDPOINT + `/${id}/complete`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(_handleErrors)
+    .then(response => response.json())
+    .catch(error => console.error('Error:', error))
+}
+
+// Unchecks todo (incomplete)
+export function uncheckTodo(id) {
+  return fetch(API_ENDPOINT + `/${id}/incomplete`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     }
