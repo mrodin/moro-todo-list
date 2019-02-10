@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import {
   handleCheckTodo,
   handleUncheckTodo,
-  handleRemoveTodo
+  handleRemoveTodo,
+  handleRenameTodo
 } from '../actions/todos'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -27,6 +28,14 @@ function Task(props) {
     dispatch(handleRemoveTodo(taskId))
   }
 
+  const handleRename = e => {
+    const { dispatch, taskId } = props
+    const originalText = props.task.text
+    const newText = prompt("Please enter your name", originalText)
+
+    dispatch(handleRenameTodo(taskId, newText))
+  }
+
   return (
     <div className='task-container flex'>
       <div className='task flex'>
@@ -44,7 +53,7 @@ function Task(props) {
         >{props.task.text}</label>
       </div>
       <div className='flex controls'>
-        <button type='button'>
+        <button type='button' onClick={handleRename}>
           <FontAwesomeIcon className='faIcon' icon={faPen} />
         </button>
         <button type='button' onClick={handleRemove}>

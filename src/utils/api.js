@@ -62,6 +62,22 @@ export function deleteTodo(id) {
     .catch(error => console.error('Error:', error))
 }
 
+// Updates todo text
+
+export function updateTodoText(id, text) {
+  var data = { text: text }
+
+  return fetch(API_ENDPOINT + `/${id}`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(_handleErrors)
+    .catch(error => console.error('Error:', error))
+}
+
 // Formats array of objects (response from API) to object containing
 // all todos with IDs as keys
 

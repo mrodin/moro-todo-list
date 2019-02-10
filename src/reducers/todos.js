@@ -2,7 +2,8 @@ import {
   RECEIVE_TODOS,
   ADD_TODO,
   SWITCH_TODO,
-  REMOVE_TODO
+  REMOVE_TODO,
+  RENAME_TODO
 } from '../actions/todos'
 
 export default function todos(state = {}, action) {
@@ -29,14 +30,19 @@ export default function todos(state = {}, action) {
         }
       }
     case REMOVE_TODO:
-      const removeId = action.id
-
-      const { [removeId]: value, ...newState } = state
+      const { [action.id]: value, ...newState } = state
 
       return {
         ...newState
       }
-
+    case RENAME_TODO:
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          text: action.text
+        }
+      }
     default:
       return state
   }

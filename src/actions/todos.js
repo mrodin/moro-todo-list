@@ -3,13 +3,15 @@ import {
   saveTodo,
   checkTodo,
   uncheckTodo,
-  deleteTodo
+  deleteTodo,
+  updateTodoText
 } from '../utils/api'
 
 export const RECEIVE_TODOS = 'RECEIVE_TODOS'
 export const ADD_TODO = 'ADD_TODO'
 export const SWITCH_TODO = 'SWITCH_TODO'
 export const REMOVE_TODO = 'REMOVE_TODO'
+export const RENAME_TODO = 'RENAME_TODO'
 
 // Get all todos
 function receiveTodos(todos) {
@@ -79,5 +81,22 @@ export function handleRemoveTodo(id) {
   return (dispatch) => {
     return deleteTodo(id)
       .then(() => dispatch(removeTodo(id)))
+  }
+}
+
+// Rename todo
+
+function renameTodo(id, text) {
+  return {
+    type: RENAME_TODO,
+    id,
+    text
+  }
+}
+
+export function handleRenameTodo(id, text) {
+  return (dispatch) => {
+    return updateTodoText(id, text)
+      .then(() => dispatch(renameTodo(id, text)))
   }
 }
