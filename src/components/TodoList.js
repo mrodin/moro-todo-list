@@ -2,23 +2,23 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Task from './Task'
-import Input from './Input';
-import Controls from './Controls';
+import InputBar from './InputBar'
+import FilterBar from './FilterBar'
 
 class TodoList extends Component {
   render() {
     return (
       <div className='todolist'>
         <h1 className='todolist__title margin-bottom--small'>TodoList App</h1>
-        <Input />
+        <InputBar />
         <ul>
           {this.props.tasks.map(task => (
             <li key={task.id}>
-              <Task task={task} />
+              <Task taskId={task.id} />
             </li>
           ))}
         </ul>
-        <Controls />
+        <FilterBar />
       </div>
     )
   }

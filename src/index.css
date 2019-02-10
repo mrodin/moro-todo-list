@@ -17,6 +17,18 @@ body {
   color: #ffffff;
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  outline: 0;
+  color: #ffffff;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
 ul {
   list-style: none;
 }
@@ -54,22 +66,24 @@ ul {
   font-weight: normal;
 }
 
-/* Input Component */
+/* InputBar Component */
 
-.input__faAngleDown {
-  font-size: 36px
-}
-
-.input__container {
+.input-bar {
   align-items: center;
 }
 
-.input__form {
+.input-bar__faAngleDown {
+  font-size: 36px
+}
+
+/* InputForm Component */
+
+.input-form {
   width: 100%;
   margin-left: 15px;  
 }
 
-.input__input {
+.input-form__input {
   width: 100%;
   padding: 10px;
   border: none;
@@ -77,6 +91,3 @@ ul {
   background-color: #fff;
   font-size: 16px;
 }
-
-/* Task Component */
-

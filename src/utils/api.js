@@ -12,7 +12,7 @@ export function getTodos() {
 
 // Saves new todo with given text
 export function saveTodo(text) {
-  var data = { text: text };
+  var data = { text: text }
 
   return fetch(API_ENDPOINT, {
     method: 'POST',

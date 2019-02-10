@@ -1,47 +1,45 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { handleCheckTodo, handleUncheckTodo } from '../actions/todos'
 
-class Task extends Component {
-  state = {
-    isCompleted: this.props.task.completed
-  }
-
-  handleChange = e => {
-    const { dispatch } = this.props
-    const { id } = this.props.task
-    const { name, checked } = e.target
-
-    this.setState({ [name]: checked })
+function Task(props) {
+  const handleChange = e => {
+    const { dispatch, taskId } = props
+    const { checked } = e.target
 
     if (checked) {
-      dispatch(handleCheckTodo(id))
+      dispatch(handleCheckTodo(taskId))
     } else {
-      dispatch(handleUncheckTodo(id))
+      dispatch(handleUncheckTodo(taskId))
     }
   }
 
-  render() {
-    return (
-      <div className='task' >
-        <label className='checkmark-container'>
-          <input
-            type='checkbox'
-            name='isCompleted'
-            checked={this.state.isCompleted}
-            onChange={this.handleChange}
-          />
-          <span className='checkmark'></span>
-          {this.props.task.text}
-        </label>
-      </div>
-    )
+  return (
+    <div className='task' >
+      <label className='checkmark-container'>
+        <input
+          type='checkbox'
+          name='isCompleted'
+          checked={props.task.completed}
+          onChange={handleChange}
+        />
+        <span className='checkmark'></span>
+        {props.task.text}
+      </label>
+    </div>
+  )
+}
+
+function mapStateToProps({ todos }, { taskId }) {
+  return {
+    task: todos[taskId]
   }
 }
 
 Task.propTypes = {
+  taskId: PropTypes.string.isRequired,
   task: PropTypes.object.isRequired
 }
 
-export default connect()(Task)
+export default connect(mapStateToProps)(Task)
