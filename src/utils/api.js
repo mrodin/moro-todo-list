@@ -52,6 +52,16 @@ export function uncheckTodo(id) {
     .catch(error => console.error('Error:', error))
 }
 
+// Deletes todo
+
+export function deleteTodo(id) {
+  return fetch(API_ENDPOINT + `/${id}`, {
+    method: 'DELETE'
+  })
+    .then(_handleErrors)
+    .catch(error => console.error('Error:', error))
+}
+
 // Formats array of objects (response from API) to object containing
 // all todos with IDs as keys
 

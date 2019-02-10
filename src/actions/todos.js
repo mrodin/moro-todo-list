@@ -2,12 +2,14 @@ import {
   getTodos,
   saveTodo,
   checkTodo,
-  uncheckTodo
+  uncheckTodo,
+  deleteTodo
 } from '../utils/api'
 
 export const RECEIVE_TODOS = 'RECEIVE_TODOS'
 export const ADD_TODO = 'ADD_TODO'
 export const SWITCH_TODO = 'SWITCH_TODO'
+export const REMOVE_TODO = 'REMOVE_TODO'
 
 // Get all todos
 function receiveTodos(todos) {
@@ -61,5 +63,21 @@ export function handleUncheckTodo(id) {
   return (dispatch) => {
     return uncheckTodo(id)
       .then(todo => dispatch(switchTodo(todo.id)))
+  }
+}
+
+// Remove todo
+
+function removeTodo(id) {
+  return {
+    type: REMOVE_TODO,
+    id
+  }
+}
+
+export function handleRemoveTodo(id) {
+  return (dispatch) => {
+    return deleteTodo(id)
+      .then(() => dispatch(removeTodo(id)))
   }
 }

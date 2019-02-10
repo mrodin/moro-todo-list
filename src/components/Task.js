@@ -1,12 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { handleCheckTodo, handleUncheckTodo } from '../actions/todos'
+import {
+  handleCheckTodo,
+  handleUncheckTodo,
+  handleRemoveTodo
+} from '../actions/todos'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 function Task(props) {
-  const handleChange = e => {
+  const handleCheckboxChange = e => {
     const { dispatch, taskId } = props
     const { checked } = e.target
 
@@ -17,6 +21,12 @@ function Task(props) {
     }
   }
 
+  const handleRemove = e => {
+    const { dispatch, taskId } = props
+
+    dispatch(handleRemoveTodo(taskId))
+  }
+
   return (
     <div className='task-container flex'>
       <div className='task flex'>
@@ -25,7 +35,7 @@ function Task(props) {
             type='checkbox'
             name='isCompleted'
             checked={props.task.completed}
-            onChange={handleChange}
+            onChange={handleCheckboxChange}
           />
         </div>
         <label
@@ -34,8 +44,13 @@ function Task(props) {
         >{props.task.text}</label>
       </div>
       <div className='flex controls'>
-        <FontAwesomeIcon className='faIcon' icon={faPen} />
-        <FontAwesomeIcon className='faIcon' icon={faTrashAlt} />
+        <button type='button'>
+          <FontAwesomeIcon className='faIcon' icon={faPen} />
+        </button>
+        <button type='button' onClick={handleRemove}>
+          <FontAwesomeIcon
+            className='faIcon' icon={faTrashAlt} />
+        </button>
       </div>
     </div>
   )

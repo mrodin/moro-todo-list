@@ -54,7 +54,8 @@ ul {
 /* TodoList Component */
 
 .todolist {
-  max-width: 480px;
+  min-width: 320px;
+  max-width: 640px;
   background-color: rgba(0, 0, 0, .6);
   padding: 10px 20px 40px;
 

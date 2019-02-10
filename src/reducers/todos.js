@@ -1,7 +1,8 @@
 import {
   RECEIVE_TODOS,
   ADD_TODO,
-  SWITCH_TODO
+  SWITCH_TODO,
+  REMOVE_TODO
 } from '../actions/todos'
 
 export default function todos(state = {}, action) {
@@ -27,6 +28,15 @@ export default function todos(state = {}, action) {
           completed: !todo.completed
         }
       }
+    case REMOVE_TODO:
+      const removeId = action.id
+
+      const { [removeId]: value, ...newState } = state
+
+      return {
+        ...newState
+      }
+
     default:
       return state
   }
