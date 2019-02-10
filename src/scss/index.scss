@@ -10,6 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 0.8rem;
   background:
     linear-gradient(40deg, transparent 40%, #9ab593),
     linear-gradient(-40deg, #ba7461 20%, #593e4e 90%);
@@ -40,54 +41,84 @@ ul {
 }
 
 .margin-bottom--small {
-  margin-bottom: 1rem;
+  margin-bottom: 15px;
 }
 
 /* App Component */
 
 .app {
   justify-content: center;
-  padding: 2rem;
+  padding: 50px;
 }
 
 /* TodoList Component */
 
 .todolist {
-  min-width: 500px;
+  max-width: 480px;
   background-color: rgba(0, 0, 0, .6);
   padding: 10px 20px 40px;
-}
 
-.todolist__title {
-  padding-bottom: 15px;
-  border-bottom: 1px solid #fff;
-  line-height: 1.2;
-  font-size: 2.2em;
-  font-weight: normal;
+
+  .title {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #fff;
+    line-height: 1.2;
+    font-size: 1.5rem;
+    font-weight: normal;
+  }
 }
 
 /* InputBar Component */
 
 .input-bar {
   align-items: center;
-}
 
-.input-bar__faAngleDown {
-  font-size: 36px
+  .fa-angle-down {
+    font-size: 2rem;
+  }
 }
 
 /* InputForm Component */
 
 .input-form {
   width: 100%;
-  margin-left: 15px;  
+  margin-left: 10px;  
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    color: #593e4e;
+    background-color: #fff;
+  }
 }
 
-.input-form__input {
+/* Task Component */
+
+.task-container {
   width: 100%;
-  padding: 10px;
-  border: none;
-  color: #593e4e;
-  background-color: #fff;
-  font-size: 16px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 2px 5px 2px;
+
+  .task {
+    align-items: center;
+  }
+
+  .checkbox-container {
+    height: 100%;
+  }
+
+  .taskname {
+    height: 100%;
+    margin-left: 15px;
+  }
+
+  .controls {
+    height: 100%;
+
+    .faIcon {
+      margin-left: 10px;
+    }
+  }
 }

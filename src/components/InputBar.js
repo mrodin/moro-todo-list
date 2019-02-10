@@ -32,7 +32,7 @@ function InputBar(props) {
   return (
     <div className='input-bar flex margin-bottom--small' >
       <button type='button' onClick={handleSwitchAll}>
-        <FontAwesomeIcon className='input-bar__faAngleDown' icon={faAngleDown} />
+        <FontAwesomeIcon icon={faAngleDown} />
       </button>
       <InputForm />
     </div>

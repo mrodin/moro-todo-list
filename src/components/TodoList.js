@@ -9,7 +9,7 @@ class TodoList extends Component {
   render() {
     return (
       <div className='todolist'>
-        <h1 className='todolist__title margin-bottom--small'>TodoList App</h1>
+        <h1 className='title margin-bottom--small'>TodoList App</h1>
         <InputBar />
         <ul>
           {this.props.tasks.map(task => (

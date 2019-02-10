@@ -31,7 +31,6 @@ class InputForm extends Component {
     return (
       <form className='input-form' onSubmit={this.handleSubmit}>
         <input
-          className='input-form__input'
           type='text'
           placeholder='What needs to be done?'
           autoComplete='off'
