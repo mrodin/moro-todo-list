@@ -5,11 +5,11 @@ import { connect } from 'react-redux'
 
 function FilterBar(props) {
   const {
+    visibilityFilter,
     showAll,
     showActive,
     showCompleted
   } = props
-  const { visibilityFilter } = props.visibilityFilter
 
   return (
     <div className='filter-bar flex'>

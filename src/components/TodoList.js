@@ -7,8 +7,7 @@ import FilterBar from './FilterBar'
 
 class TodoList extends Component {
   render() {
-    const { tasks } = this.props
-    const { visibilityFilter } = this.props.visibilityFilter
+    const { visibilityFilter, tasks } = this.props
 
     function getVisibleTodos(visibilityFilter, tasks) {
       switch (visibilityFilter) {

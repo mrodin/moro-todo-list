@@ -1,6 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { setVisibilityFilter } from '../actions/visibilityFilter'
 
 function FilterButton(props) {
   return (
@@ -21,4 +19,4 @@ const activeButton = {
   border: 'none'
 }
 
-export default connect()(FilterButton)
+export default FilterButton
