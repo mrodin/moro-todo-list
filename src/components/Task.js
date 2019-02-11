@@ -33,13 +33,15 @@ function Task(props) {
     const originalText = props.task.text
     const newText = prompt("Please enter your name", originalText)
 
-    dispatch(handleRenameTodo(taskId, newText))
+    if (!!newText) {
+      dispatch(handleRenameTodo(taskId, newText))
+    }
   }
 
   return (
     <div className='task-container flex'>
       <div className='task flex'>
-        <div className='checkbox-container'>
+        <div className='checkbox-container flex'>
           <input
             type='checkbox'
             name='isCompleted'

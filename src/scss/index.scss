@@ -57,7 +57,7 @@ ul {
   width: 400px;
   min-width: 320px;
   background-color: rgba(0, 0, 0, .6);
-  padding: 10px 20px 40px;
+  padding: 20px;
 
 
   .title {
@@ -87,7 +87,7 @@ ul {
 
   input {
     width: 100%;
-    padding: 10px;
+    padding: 7px;
     border: none;
     color: #593e4e;
     background-color: #fff;
@@ -122,4 +122,32 @@ ul {
       margin-left: 10px;
     }
   }
+}
+
+/* FilterBar Component */
+
+.filter-bar {
+  margin-top: 15px;
+  justify-content: space-around;
+}
+
+/* FilterButton Component */
+
+.filter-button {
+  width: 80px;
+  height: 25px;
+  border: 1px solid #696969;
+  background: transparent;
+  color: #ffffff;
+  margin: 3px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.filter-button:hover {
+  color: #000000;
+  background: #ffffff;
+  border: none;
+  cursor: pointer;
 }

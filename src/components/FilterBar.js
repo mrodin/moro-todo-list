@@ -1,14 +1,54 @@
 import React from 'react'
-import Button from './Button'
+import FilterButton from './FilterButton'
+import { setVisibilityFilter } from '../actions/visibilityFilter'
+import { connect } from 'react-redux'
 
-function FilterBar() {
+function FilterBar(props) {
+  const {
+    showAll,
+    showActive,
+    showCompleted
+  } = props
+  const { visibilityFilter } = props.visibilityFilter
+
   return (
-    <div className='controls flex'>
-      <Button>All</Button>
-      <Button>Active</Button>
-      <Button>Completed</Button>
+    <div className='filter-bar flex'>
+      <FilterButton
+        active={visibilityFilter === 'SHOW_ALL' ? true : false}
+        clickHandler={showAll}
+      >
+        All
+      </FilterButton>
+
+      <FilterButton
+        active={visibilityFilter === 'SHOW_ACTIVE' ? true : false}
+        clickHandler={showActive}
+      >
+        Active
+      </FilterButton>
+
+      <FilterButton
+        active={visibilityFilter === 'SHOW_COMPLETED' ? true : false}
+        clickHandler={showCompleted}
+      >
+        Completed
+      </FilterButton>
     </div>
   )
 }
 
-export default FilterBar
+function mapStateToProps({ visibilityFilter }) {
+  return {
+    visibilityFilter
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    showAll: () => dispatch(setVisibilityFilter('SHOW_ALL')),
+    showActive: () => dispatch(setVisibilityFilter('SHOW_ACTIVE')),
+    showCompleted: () => dispatch(setVisibilityFilter('SHOW_COMPLETED'))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterBar)

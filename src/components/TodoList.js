@@ -7,12 +7,30 @@ import FilterBar from './FilterBar'
 
 class TodoList extends Component {
   render() {
+    const { tasks } = this.props
+    const { visibilityFilter } = this.props.visibilityFilter
+
+    function getVisibleTodos(visibilityFilter, tasks) {
+      switch (visibilityFilter) {
+        case 'SHOW_ALL':
+          return tasks
+        case 'SHOW_ACTIVE':
+          return tasks.filter(todo => !todo.completed)
+        case 'SHOW_COMPLETED':
+          return tasks.filter(todo => todo.completed)
+        default:
+          return tasks
+      }
+    }
+
+    const visibleTodos = getVisibleTodos(visibilityFilter, tasks)
+
     return (
       <div className='todolist'>
         <h1 className='title margin-bottom--small'>TodoList App</h1>
         <InputBar />
         <ul>
-          {this.props.tasks.map(task => (
+          {visibleTodos.map(task => (
             <li key={task.id}>
               <Task taskId={task.id} />
             </li>
@@ -24,18 +42,20 @@ class TodoList extends Component {
   }
 }
 
-function mapStateToProps({ todos }) {
+function mapStateToProps({ visibilityFilter, todos }) {
   const todoIds = Object.keys(todos)
 
   const tasks = todoIds.map(id => todos[id])
     .sort((a, b) => b.createdDate - a.createdDate)
 
   return {
+    visibilityFilter,
     tasks
   }
 }
 
 TodoList.propTypes = {
+  visibilityFilter: PropTypes.string.isRequired,
   tasks: PropTypes.array.isRequired
 }
 
