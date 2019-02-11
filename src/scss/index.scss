@@ -151,3 +151,14 @@ ul {
   border: none;
   cursor: pointer;
 }
+
+/* StatusBar Component */
+
+.status-bar {
+  justify-content: space-between;
+
+  .clear-button {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

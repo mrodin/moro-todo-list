@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Task from './Task'
 import InputBar from './InputBar'
 import FilterBar from './FilterBar'
+import StatusBar from './StatusBar';
 
 class TodoList extends Component {
   render() {
@@ -23,19 +24,21 @@ class TodoList extends Component {
     }
 
     const visibleTodos = getVisibleTodos(visibilityFilter, tasks)
+      .map(task => (
+        <li key={task.id}>
+          <Task taskId={task.id} />
+        </li>
+      ))
 
     return (
       <div className='todolist'>
         <h1 className='title margin-bottom--small'>TodoList App</h1>
         <InputBar />
         <ul>
-          {visibleTodos.map(task => (
-            <li key={task.id}>
-              <Task taskId={task.id} />
-            </li>
-          ))}
+          {visibleTodos}
         </ul>
         <FilterBar />
+        <StatusBar />
       </div>
     )
   }

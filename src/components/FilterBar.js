@@ -12,7 +12,7 @@ function FilterBar(props) {
   } = props
 
   return (
-    <div className='filter-bar flex'>
+    <div className='filter-bar flex margin-bottom--small'>
       <FilterButton
         active={visibilityFilter === 'SHOW_ALL' ? true : false}
         clickHandler={showAll}
