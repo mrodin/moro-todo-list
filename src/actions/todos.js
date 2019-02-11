@@ -27,6 +27,7 @@ export function handleReceiveTodos() {
       .then(({ todos }) => {
         dispatch(receiveTodos(todos))
       })
+      .catch(error => console.error('Error:', error))
   }
 }
 
@@ -42,6 +43,7 @@ export function handleAddTodo(text) {
   return (dispatch) => {
     return saveTodo(text)
       .then(todo => dispatch(addTodo(todo)))
+      .catch(error => console.error('Error:', error))
   }
 }
 
@@ -58,6 +60,7 @@ export function handleCheckTodo(id) {
   return (dispatch) => {
     return checkTodo(id)
       .then(todo => dispatch(switchTodo(todo.id)))
+      .catch(error => console.error('Error:', error))
   }
 }
 
@@ -65,6 +68,7 @@ export function handleUncheckTodo(id) {
   return (dispatch) => {
     return uncheckTodo(id)
       .then(todo => dispatch(switchTodo(todo.id)))
+      .catch(error => console.error('Error:', error))
   }
 }
 
@@ -81,6 +85,7 @@ export function handleRemoveTodo(id) {
   return (dispatch) => {
     return deleteTodo(id)
       .then(() => dispatch(removeTodo(id)))
+      .catch(error => console.error('Error:', error))
   }
 }
 
@@ -98,5 +103,6 @@ export function handleRenameTodo(id, text) {
   return (dispatch) => {
     return updateTodoText(id, text)
       .then(() => dispatch(renameTodo(id, text)))
+      .catch(error => console.error('Error:', error))
   }
 }
