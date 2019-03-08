@@ -14,22 +14,18 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <LoadingBar />
         <div className="app flex">
-          {this.props.loading === true
-            ? null
-            : <TodoList />
-          }
+          <TodoList />
         </div>
       </Fragment>
     )
   }
 }
 
-function mapStateToProps({ todos }) {
-  return {
-    loading: Object.entries(todos).length === 0
-  }
-}
+// function mapStateToProps({ todos }) {
+//   return {
+//     loading: Object.entries(todos).length === 0
+//   }
+// }
 
-export default connect(mapStateToProps)(App)
+export default connect()(App)

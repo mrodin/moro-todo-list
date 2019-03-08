@@ -32,15 +32,15 @@ function StatusBar(props) {
 }
 
 function mapStateToProps({ todos }) {
-  const todoKeys = Object.keys(todos)
-  const todosTotal = todoKeys.length
-  const todosCompleted = todoKeys.filter(id => {
-    return todos[id].completed === true
-  })
+  // const todoKeys = Object.keys(todos)
+  // const todosTotal = todoKeys.length
+  // const todosCompleted = todoKeys.filter(id => {
+  //   return todos[id].completed === true
+  // })
 
   return {
-    todosTotal,
-    todosCompleted
+    todosTotal: 1,
+    todosCompleted: 2
   }
 }
 

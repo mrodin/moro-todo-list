@@ -44,14 +44,18 @@ class TodoList extends Component {
   }
 }
 
-function mapStateToProps({ visibilityFilter, todos }) {
-  const todoIds = Object.keys(todos)
+function mapStateToProps(state) {
+  console.log(state)
 
-  const tasks = todoIds.map(id => todos[id])
-    .sort((a, b) => b.createdDate - a.createdDate)
+  const todoIds = state.get("todos").keySeq().toArray()
+
+  const tasks = state.get('todos')
+    .toList()
+    .sort((a, b) => b.get("createdDate") - a.get("createdDate"))
+    .toJS()
 
   return {
-    visibilityFilter,
+    // visibilityFilter,
     tasks
   }
 }
