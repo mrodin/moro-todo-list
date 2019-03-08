@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+
 import { handleReceiveTodos } from '../actions/todos'
+
+import LoadingBar from 'react-redux-loading'
 import TodoList from './TodoList'
 
 class App extends Component {
@@ -10,11 +13,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app flex">
-        <TodoList />
-      </div>
+      <Fragment>
+        <LoadingBar />
+        <div className="app flex">
+          {this.props.loading === true
+            ? null
+            : <TodoList />
+          }
+        </div>
+      </Fragment>
     )
   }
 }
 
-export default connect()(App)
+function mapStateToProps({ todos }) {
+  return {
+    loading: Object.entries(todos).length === 0
+  }
+}
+
+export default connect(mapStateToProps)(App)
