@@ -5,8 +5,7 @@ export function getTodos() {
   return fetch(API_ENDPOINT)
     .then(_handleErrors)
     .then(response => response.json())
-    .then(jsonRaw => _formatTodos(jsonRaw))
-    .then(jsonFormatted => ({ todos: jsonFormatted }))
+    .then(todoList => ({ todos: todoList }))
     .catch(error => console.error('Error:', error))
 }
 
@@ -76,17 +75,6 @@ export function updateTodoText(id, text) {
   })
     .then(_handleErrors)
     .catch(error => console.error('Error:', error))
-}
-
-// Formats array of objects (response from API) to object containing
-// all todos with IDs as keys
-
-function _formatTodos(todos) {
-  const formattedTodos = todos.reduce((obj, item) => {
-    obj[item.id] = item
-    return obj
-  }, {})
-  return formattedTodos
 }
 
 // Handles possible HTTP error codes from API

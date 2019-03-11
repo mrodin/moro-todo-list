@@ -3,22 +3,22 @@ import { connect } from 'react-redux'
 import { handleRemoveTodo } from '../actions/todos'
 
 function StatusBar(props) {
-  const { todosTotal, todosCompleted } = props
+  const { todosSize, todosCompleted } = props
 
   const handleDeleteCompleted = e => {
     const { dispatch } = props
 
     todosCompleted.forEach(todo => {
-      dispatch(handleRemoveTodo(todo))
+      dispatch(handleRemoveTodo(todo.id))
     })
   }
 
   return (
     <div className='status-bar flex'>
-      <div>{`${todosCompleted.length} / ${todosTotal} tasks completed`}</div>
+      <div>{`${todosCompleted.size} / ${todosSize} tasks completed`}</div>
       <div>
         {
-          todosCompleted.length > 0 &&
+          todosCompleted.size > 0 &&
           <button
             className='clear-button'
             onClick={handleDeleteCompleted}
@@ -31,15 +31,13 @@ function StatusBar(props) {
   )
 }
 
-function mapStateToProps({ todos }) {
-  const todoKeys = Object.keys(todos)
-  const todosTotal = todoKeys.length
-  const todosCompleted = todoKeys.filter(id => {
-    return todos[id].completed === true
-  })
+function mapStateToProps(state) {
+  const todos = state.get('todos')
+  const todosSize = todos.size
+  const todosCompleted = todos.filter(todo => todo.completed === true)
 
   return {
-    todosTotal,
+    todosSize,
     todosCompleted
   }
 }

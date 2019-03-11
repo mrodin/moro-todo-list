@@ -12,20 +12,12 @@ function InputBar(props) {
   const handleSwitchAll = e => {
     const { dispatch, todos } = props
 
-    const incompleteTodoIds = Object
-      .keys(todos)
-      .filter(id => {
-        return todos[id].completed === false
-      })
+    const incompleteTodos = todos.filter(todo => todo.completed === false)
 
-    if (incompleteTodoIds.length === 0) {
-      Object.keys(todos).forEach(id => {
-        dispatch(handleUncheckTodo(id))
-      })
+    if (incompleteTodos.size === 0) {
+      todos.forEach(todo => dispatch(handleUncheckTodo(todo.id)))
     } else {
-      incompleteTodoIds.forEach(id => {
-        dispatch(handleCheckTodo(id))
-      })
+      incompleteTodos.forEach(todo => dispatch(handleCheckTodo(todo.id)))
     }
   }
 
@@ -39,9 +31,9 @@ function InputBar(props) {
   )
 }
 
-function mapStateToProps({ todos }) {
+function mapStateToProps(state) {
   return {
-    todos
+    todos: state.get('todos')
   }
 }
 

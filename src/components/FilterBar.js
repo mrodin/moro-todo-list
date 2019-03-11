@@ -37,9 +37,9 @@ function FilterBar(props) {
   )
 }
 
-function mapStateToProps({ visibilityFilter }) {
+function mapStateToProps(state) {
   return {
-    visibilityFilter
+    visibilityFilter: state.get('visibilityFilter')
   }
 }
 

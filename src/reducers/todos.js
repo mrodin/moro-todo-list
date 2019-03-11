@@ -1,3 +1,5 @@
+import { Map } from 'immutable'
+
 import {
   RECEIVE_TODOS,
   ADD_TODO,
@@ -6,43 +8,18 @@ import {
   RENAME_TODO
 } from '../actions/todos'
 
-export default function todos(state = {}, action) {
+export default function todos(state = Map(), action) {
   switch (action.type) {
     case RECEIVE_TODOS:
-      return {
-        ...state,
-        ...action.todos,
-      }
+      return Map(action.todos.map(todo => [todo.id, todo]))
     case ADD_TODO:
-      return {
-        ...state,
-        [action.todo.id]: action.todo
-      }
+      return state.merge({ [action.todo.id]: action.todo })
     case SWITCH_TODO:
-      const { id } = action
-      const todo = state[id]
-
-      return {
-        ...state,
-        [id]: {
-          ...todo,
-          completed: !todo.completed
-        }
-      }
+      return state.setIn([action.id, 'completed'], !state.getIn([action.id, 'completed']))
     case REMOVE_TODO:
-      const { [action.id]: value, ...newState } = state
-
-      return {
-        ...newState
-      }
+      return state.delete(action.id)
     case RENAME_TODO:
-      return {
-        ...state,
-        [action.id]: {
-          ...state[action.id],
-          text: action.text
-        }
-      }
+      return state.setIn([action.id, 'text'], action.text)
     default:
       return state
   }

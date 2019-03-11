@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import { handleReceiveTodos } from '../actions/todos'
 
-import LoadingBar from 'react-redux-loading'
 import TodoList from './TodoList'
 
 class App extends Component {
@@ -14,10 +13,9 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <LoadingBar />
         <div className="app flex">
           {this.props.loading === true
-            ? null
+            ? <p>Loading...</p>
             : <TodoList />
           }
         </div>
@@ -26,9 +24,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ todos }) {
+function mapStateToProps(state) {
   return {
-    loading: Object.entries(todos).length === 0
+    loading: state.get('todos').isEmpty()
   }
 }
 
