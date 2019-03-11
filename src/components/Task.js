@@ -69,7 +69,7 @@ function Task(props) {
 
 function mapStateToProps(state, { taskId }) {
   return {
-    task: state.getIn(["todos", taskId]).toJS()
+    task: state.getIn(["todos", taskId])
   }
 }
 

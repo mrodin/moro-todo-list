@@ -4,7 +4,7 @@ import './scss/index.scss'
 import App from './components/App'
 import { createStore, compose } from 'redux'
 import { Provider } from 'react-redux'
-import reducer from './reducers/todos'
+import reducer from './reducers'
 import middleware from './middleware'
 
 const store = createStore(

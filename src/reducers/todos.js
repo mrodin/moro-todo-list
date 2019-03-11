@@ -1,6 +1,4 @@
-import { Map, fromJS } from 'immutable'
-import { combineReducers } from 'redux-immutable'
-import { loadingBarReducer } from 'react-redux-loading'
+import { Map } from 'immutable'
 
 import {
   RECEIVE_TODOS,
@@ -10,70 +8,19 @@ import {
   RENAME_TODO
 } from '../actions/todos'
 
-const todosMap = (state = Map(), action) => {
+export default function todos(state = Map(), action) {
   switch (action.type) {
     case RECEIVE_TODOS:
-      // return Map(action.todos.map(todo => [todo.id, todo]))
-      return fromJS(action.todos)
+      return Map(action.todos.map(todo => [todo.id, todo]))
+    case ADD_TODO:
+      return state.merge({ [action.todo.id]: action.todo })
+    case SWITCH_TODO:
+      return state.setIn([action.id, 'completed'], !state.getIn([action.id, 'completed']))
+    case REMOVE_TODO:
+      return state.delete(action.id)
+    case RENAME_TODO:
+      return state.setIn([action.id, 'text'], action.text)
     default:
       return state
   }
 }
-
-// const todosMap = (state = {}, action) => {
-//   switch (action.type) {
-//     case RECEIVE_TODOS:
-//       return {
-//         ...state,
-//         ...action.todos
-//       }
-//     default:
-//       return state
-//   }
-// }
-
-// export default function todos(state = {}, action) {
-//   switch (action.type) {
-//     case RECEIVE_TODOS:
-//       return {
-//         ...state,
-//         ...action.todos,
-//       }
-//     case ADD_TODO:
-//       return {
-//         ...state,
-//         [action.todo.id]: action.todo
-//       }
-//     case SWITCH_TODO:
-//       const { id } = action
-//       const todo = state[id]
-
-//       return {
-//         ...state,
-//         [id]: {
-//           ...todo,
-//           completed: !todo.completed
-//         }
-//       }
-//     case REMOVE_TODO:
-//       const { [action.id]: value, ...newState } = state
-
-//       return {
-//         ...newState
-//       }
-//     case RENAME_TODO:
-//       return {
-//         ...state,
-//         [action.id]: {
-//           ...state[action.id],
-//           text: action.text
-//         }
-//       }
-//     default:
-//       return state
-//   }
-// }
-
-export default combineReducers({
-  todos: todosMap,
-})
