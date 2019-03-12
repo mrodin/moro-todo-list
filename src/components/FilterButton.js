@@ -14,7 +14,7 @@ function FilterButton(props) {
 }
 
 const activeButton = {
-  color: "#000000",
+  color: '#000000',
   background: '#ffffff',
   border: 'none'
 }

@@ -1,7 +1,10 @@
 import React from 'react'
-import FilterButton from './FilterButton'
-import { setVisibilityFilter } from '../actions/visibilityFilter'
 import { connect } from 'react-redux'
+
+import { setVisibilityFilter } from '../actions/visibilityFilter'
+import { getVisibilityFiler } from '../selectors/todos'
+
+import FilterButton from './FilterButton'
 
 function FilterBar(props) {
   const {
@@ -39,7 +42,7 @@ function FilterBar(props) {
 
 function mapStateToProps(state) {
   return {
-    visibilityFilter: state.get('visibilityFilter')
+    visibilityFilter: getVisibilityFiler(state)
   }
 }
 

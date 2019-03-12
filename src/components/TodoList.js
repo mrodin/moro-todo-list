@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import PropTypes from 'prop-types'
+
+import { getOrderedVisibleTodos } from '../selectors/todos'
+
 import Task from './Task'
 import InputBar from './InputBar'
 import FilterBar from './FilterBar'
@@ -11,10 +13,10 @@ class TodoList extends Component {
     const { tasks } = this.props
 
     const taskList = tasks.map(task => (
-        <li key={task}>
-          <Task taskId={task} />
-        </li>
-      ))
+      <li key={task}>
+        <Task taskId={task} />
+      </li>
+    ))
 
     return (
       <div className='todolist'>
@@ -31,31 +33,9 @@ class TodoList extends Component {
 }
 
 function mapStateToProps(state) {
-  const visibilityFilter = state.get('visibilityFilter')
-  const storeTasks = state.get('todos')
-  
-  function getVisibleTodos(visibilityFilter, tasks) {
-    switch (visibilityFilter) {
-      case 'SHOW_ALL':
-        return tasks
-      case 'SHOW_ACTIVE':
-        return tasks.filter(todo => !todo.completed)
-      case 'SHOW_COMPLETED':
-        return tasks.filter(todo => todo.completed)
-      default:
-        return tasks
-    }
-  }
-
-  const tasks = getVisibleTodos(visibilityFilter, storeTasks).keySeq()
-
   return {
-    tasks
+    tasks: getOrderedVisibleTodos(state).keySeq()
   }
 }
-
-// TodoList.propTypes = {
-//   tasks: PropTypes.array.isRequired
-// }
 
 export default connect(mapStateToProps)(TodoList)

@@ -1,12 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
 import {
   handleCheckTodo,
   handleUncheckTodo,
   handleRemoveTodo,
   handleRenameTodo
 } from '../actions/todos'
+import { getTodoById } from '../selectors/todos'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
@@ -30,8 +33,8 @@ function Task(props) {
 
   const handleRename = e => {
     const { dispatch, taskId } = props
-    const originalText = props.task.text
-    const newText = prompt("Please enter your name", originalText)
+    const originalText = props.task.get('text')
+    const newText = prompt('Please enter name', originalText)
 
     if (!!newText) {
       dispatch(handleRenameTodo(taskId, newText))
@@ -45,14 +48,14 @@ function Task(props) {
           <input
             type='checkbox'
             name='isCompleted'
-            checked={props.task.completed}
+            checked={props.task.get('completed')}
             onChange={handleCheckboxChange}
           />
         </div>
         <label
           className='taskname'
-          style={props.task.completed ? completedStyle : null}
-        >{props.task.text}</label>
+          style={props.task.get('completed') ? completedStyle : null}
+        >{props.task.get('text')}</label>
       </div>
       <div className='flex controls'>
         <button type='button' onClick={handleRename}>
@@ -69,7 +72,7 @@ function Task(props) {
 
 function mapStateToProps(state, { taskId }) {
   return {
-    task: state.getIn(["todos", taskId])
+    task: getTodoById(state, taskId)
   }
 }
 
@@ -79,9 +82,9 @@ Task.propTypes = {
 }
 
 const completedStyle = {
-  fontStyle: "italic",
-  color: "#696969",
-  textDecoration: "line-through"
+  fontStyle: 'italic',
+  color: '#696969',
+  textDecoration: 'line-through'
 }
 
 export default connect(mapStateToProps)(Task)

@@ -11,9 +11,9 @@ import {
 export default function todos(state = Map(), action) {
   switch (action.type) {
     case RECEIVE_TODOS:
-      return Map(action.todos.map(todo => [todo.id, todo]))
+      return Map(action.todos.map(todo => [todo.get('id'), todo]))
     case ADD_TODO:
-      return state.merge({ [action.todo.id]: action.todo })
+      return state.set(action.todo.id, Map(action.todo))
     case SWITCH_TODO:
       return state.setIn([action.id, 'completed'], !state.getIn([action.id, 'completed']))
     case REMOVE_TODO:

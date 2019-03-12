@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
 import { handleCheckTodo, handleUncheckTodo } from '../actions/todos'
+import { getTodos } from '../selectors/todos'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import InputForm from './InputForm'
@@ -12,12 +15,12 @@ function InputBar(props) {
   const handleSwitchAll = e => {
     const { dispatch, todos } = props
 
-    const incompleteTodos = todos.filter(todo => todo.completed === false)
+    const incompleteTodos = todos.filter(todo => todo.get('completed') === false)
 
     if (incompleteTodos.size === 0) {
-      todos.forEach(todo => dispatch(handleUncheckTodo(todo.id)))
+      todos.forEach(todo => dispatch(handleUncheckTodo(todo.get('id'))))
     } else {
-      incompleteTodos.forEach(todo => dispatch(handleCheckTodo(todo.id)))
+      incompleteTodos.forEach(todo => dispatch(handleCheckTodo(todo.get('id'))))
     }
   }
 
@@ -33,7 +36,7 @@ function InputBar(props) {
 
 function mapStateToProps(state) {
   return {
-    todos: state.get('todos')
+    todos: getTodos(state)
   }
 }
 
