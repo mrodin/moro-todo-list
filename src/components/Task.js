@@ -30,7 +30,7 @@ function Task(props) {
 
   const handleRename = e => {
     const { dispatch, taskId } = props
-    const originalText = props.task.text
+    const originalText = props.task.get('text')
     const newText = prompt("Please enter your name", originalText)
 
     if (!!newText) {
@@ -45,14 +45,14 @@ function Task(props) {
           <input
             type='checkbox'
             name='isCompleted'
-            checked={props.task.completed}
+            checked={props.task.get('completed')}
             onChange={handleCheckboxChange}
           />
         </div>
         <label
           className='taskname'
-          style={props.task.completed ? completedStyle : null}
-        >{props.task.text}</label>
+          style={props.task.get('completed') ? completedStyle : null}
+        >{props.task.get('text')}</label>
       </div>
       <div className='flex controls'>
         <button type='button' onClick={handleRename}>
@@ -69,7 +69,7 @@ function Task(props) {
 
 function mapStateToProps(state, { taskId }) {
   return {
-    task: state.getIn(["todos", taskId])
+    task: state.getIn(['todos', taskId])
   }
 }
 

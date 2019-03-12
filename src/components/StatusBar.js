@@ -9,7 +9,7 @@ function StatusBar(props) {
     const { dispatch } = props
 
     todosCompleted.forEach(todo => {
-      dispatch(handleRemoveTodo(todo.id))
+      dispatch(handleRemoveTodo(todo.get('id')))
     })
   }
 
@@ -34,7 +34,7 @@ function StatusBar(props) {
 function mapStateToProps(state) {
   const todos = state.get('todos')
   const todosSize = todos.size
-  const todosCompleted = todos.filter(todo => todo.completed === true)
+  const todosCompleted = todos.filter(todo => todo.get('completed') === true)
 
   return {
     todosSize,

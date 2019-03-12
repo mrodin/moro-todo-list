@@ -30,7 +30,7 @@ class TodoList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state) {  
   const visibilityFilter = state.get('visibilityFilter')
   const storeTasks = state.get('todos')
   
@@ -39,9 +39,9 @@ function mapStateToProps(state) {
       case 'SHOW_ALL':
         return tasks
       case 'SHOW_ACTIVE':
-        return tasks.filter(todo => !todo.completed)
+        return tasks.filter(todo => !todo.get('completed'))
       case 'SHOW_COMPLETED':
-        return tasks.filter(todo => todo.completed)
+        return tasks.filter(todo => todo.get('completed'))
       default:
         return tasks
     }

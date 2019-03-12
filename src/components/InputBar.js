@@ -12,12 +12,12 @@ function InputBar(props) {
   const handleSwitchAll = e => {
     const { dispatch, todos } = props
 
-    const incompleteTodos = todos.filter(todo => todo.completed === false)
+    const incompleteTodos = todos.filter(todo => todo.get('completed') === false)
 
     if (incompleteTodos.size === 0) {
-      todos.forEach(todo => dispatch(handleUncheckTodo(todo.id)))
+      todos.forEach(todo => dispatch(handleUncheckTodo(todo.get('id'))))
     } else {
-      incompleteTodos.forEach(todo => dispatch(handleCheckTodo(todo.id)))
+      incompleteTodos.forEach(todo => dispatch(handleCheckTodo(todo.get('id'))))
     }
   }
 
