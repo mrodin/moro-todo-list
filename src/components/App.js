@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import { handleReceiveTodos } from '../actions/todos'
+import { getTodos } from '../selectors/todos'
 
 import TodoList from './TodoList'
 
@@ -26,7 +27,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    loading: state.get('todos').isEmpty()
+    loading: getTodos(state).isEmpty()
   }
 }
 

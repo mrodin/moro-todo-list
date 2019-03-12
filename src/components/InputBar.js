@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
 import { handleCheckTodo, handleUncheckTodo } from '../actions/todos'
+import { getTodos } from '../selectors/todos'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import InputForm from './InputForm'
@@ -33,7 +36,7 @@ function InputBar(props) {
 
 function mapStateToProps(state) {
   return {
-    todos: state.get('todos')
+    todos: getTodos(state)
   }
 }
 

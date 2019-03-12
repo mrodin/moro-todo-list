@@ -1,12 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
 import {
   handleCheckTodo,
   handleUncheckTodo,
   handleRemoveTodo,
   handleRenameTodo
 } from '../actions/todos'
+import { getTodoById } from '../selectors/todos'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
@@ -69,7 +72,7 @@ function Task(props) {
 
 function mapStateToProps(state, { taskId }) {
   return {
-    task: state.getIn(['todos', taskId])
+    task: getTodoById(state, taskId)
   }
 }
 
