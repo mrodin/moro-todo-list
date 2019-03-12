@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import PropTypes from 'prop-types'
 import Task from './Task'
 import InputBar from './InputBar'
 import FilterBar from './FilterBar'
@@ -53,9 +52,5 @@ function mapStateToProps(state) {
     tasks
   }
 }
-
-// TodoList.propTypes = {
-//   tasks: PropTypes.array.isRequired
-// }
 
 export default connect(mapStateToProps)(TodoList)

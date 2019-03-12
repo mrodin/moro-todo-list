@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div className="app flex">
+        <div className='app flex'>
           {this.props.loading === true
             ? <p>Loading...</p>
             : <TodoList />

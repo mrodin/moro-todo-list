@@ -7,7 +7,6 @@ export function getTodos() {
   return fetch(API_ENDPOINT)
     .then(_handleErrors)
     .then(response => response.json())
-    // .then(todoList => console.log(fromJS(todoList)))
     .then(todoList => ({ todos: fromJS(todoList) }))
     .catch(error => console.error('Error:', error))
 }

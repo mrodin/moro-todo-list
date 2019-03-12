@@ -31,7 +31,7 @@ function Task(props) {
   const handleRename = e => {
     const { dispatch, taskId } = props
     const originalText = props.task.get('text')
-    const newText = prompt("Please enter your name", originalText)
+    const newText = prompt('Please enter name', originalText)
 
     if (!!newText) {
       dispatch(handleRenameTodo(taskId, newText))
@@ -79,9 +79,9 @@ Task.propTypes = {
 }
 
 const completedStyle = {
-  fontStyle: "italic",
-  color: "#696969",
-  textDecoration: "line-through"
+  fontStyle: 'italic',
+  color: '#696969',
+  textDecoration: 'line-through'
 }
 
 export default connect(mapStateToProps)(Task)
