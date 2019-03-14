@@ -8,7 +8,7 @@ import createSagaMiddleware from 'redux-saga'
 import App from './components/App'
 
 import reducer from './reducers'
-import rootSaga from './sagas/todos'
+import watchTodosLoad from './sagas/todos'
 import './scss/index.scss'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -20,7 +20,7 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   ))
 
-sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(watchTodosLoad)
 
 store.dispatch({ type: 'HELLO' })
 

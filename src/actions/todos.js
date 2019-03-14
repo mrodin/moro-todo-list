@@ -1,5 +1,4 @@
 import {
-  getTodos,
   saveTodo,
   checkTodo,
   uncheckTodo,
@@ -7,27 +6,24 @@ import {
   updateTodoText
 } from '../utils/api'
 
-export const RECEIVE_TODOS = 'RECEIVE_TODOS'
+export const LOAD_TODOS = 'GET_TODOS'
+export const SET_TODOS = 'SET_TODOS'
 export const ADD_TODO = 'ADD_TODO'
 export const SWITCH_TODO = 'SWITCH_TODO'
 export const REMOVE_TODO = 'REMOVE_TODO'
 export const RENAME_TODO = 'RENAME_TODO'
 
-// Get all todos
-function receiveTodos(todos) {
+// Get all todos from API call
+export function loadTodos() {
   return {
-    type: RECEIVE_TODOS,
-    todos
+    type: LOAD_TODOS
   }
 }
 
-export function handleReceiveTodos() {
-  return (dispatch) => {
-    return getTodos()
-      .then(({ todos }) => {
-        dispatch(receiveTodos(todos))
-      })
-      .catch(error => console.error('Error:', error))
+export function setTodos(todos) {
+  return {
+    type: SET_TODOS,
+    todos
   }
 }
 

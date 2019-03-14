@@ -1,12 +1,16 @@
-import { takeEvery, put } from 'redux-saga/effects'
+import { takeEvery, put, call } from 'redux-saga/effects'
 
-function* workerSaga() {
-    console.log('Hello from worker')
-    yield put({ type: 'ACTION_FROM_WORKER' })
+import { LOAD_TODOS } from '../actions/todos'
+import { fetchTodos } from '../utils/api'
+import { setTodos } from '../actions/todos'
+
+function* handleTodosLoad() {
+    const todos = yield call(fetchTodos)
+    yield put(setTodos(todos))
 }
 
-function* rootSaga() {
-    yield takeEvery('HELLO', workerSaga)
+function* watchTodosLoad() {
+    yield takeEvery(LOAD_TODOS, handleTodosLoad)
 }
 
-export default rootSaga
+export default watchTodosLoad

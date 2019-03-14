@@ -1,21 +1,20 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
-import { handleReceiveTodos } from '../actions/todos'
-import { getTodos } from '../selectors/todos'
+import { loadTodos } from '../actions/todos'
 
 import TodoList from './TodoList'
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleReceiveTodos())
+    this.props.dispatch(loadTodos())
   }
 
   render() {
     return (
       <Fragment>
         <div className='app flex'>
-          {this.props.loading === true
+          {this.props.isFetching === true
             ? <p>Loading...</p>
             : <TodoList />
           }
@@ -27,7 +26,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    loading: getTodos(state).isEmpty()
+    isFetching: state.get('isFetching')
   }
 }
 
