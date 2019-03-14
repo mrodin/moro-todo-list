@@ -1,5 +1,3 @@
-import { showLoading, hideLoading } from 'react-redux-loading'
-
 import {
   getTodos,
   saveTodo,
@@ -25,11 +23,9 @@ function receiveTodos(todos) {
 
 export function handleReceiveTodos() {
   return (dispatch) => {
-    dispatch(showLoading())
     return getTodos()
       .then(({ todos }) => {
         dispatch(receiveTodos(todos))
-        dispatch(hideLoading())
       })
       .catch(error => console.error('Error:', error))
   }
