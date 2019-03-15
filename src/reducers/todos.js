@@ -1,7 +1,6 @@
 import { Map } from 'immutable'
 
 import {
-  SWITCH_TODO,
   REMOVE_TODO,
   RENAME_TODO
 } from '../actions/todos'

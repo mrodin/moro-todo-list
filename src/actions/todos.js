@@ -1,6 +1,4 @@
 import {
-  checkTodo,
-  uncheckTodo,
   deleteTodo,
   updateTodoText
 } from '../utils/api'
@@ -54,34 +52,9 @@ export const switchingTodo = {
   })
 }
 
-export const SWITCH_TODO = 'SWITCH_TODO'
 export const REMOVE_TODO = 'REMOVE_TODO'
 export const RENAME_TODO = 'RENAME_TODO'
 export const UPDATE_NEW_TODO_TEXT = 'UPDATE_NEW_TODO_TEXT'
-
-// Switch todo
-function switchTodo(id) {
-  return {
-    type: SWITCH_TODO,
-    id
-  }
-}
-
-export function handleCheckTodo(id) {
-  return (dispatch) => {
-    return checkTodo(id)
-      .then(todo => dispatch(switchTodo(todo.id)))
-      .catch(error => console.error('Error:', error))
-  }
-}
-
-export function handleUncheckTodo(id) {
-  return (dispatch) => {
-    return uncheckTodo(id)
-      .then(todo => dispatch(switchTodo(todo.id)))
-      .catch(error => console.error('Error:', error))
-  }
-}
 
 // Remove todo
 function removeTodo(id) {
