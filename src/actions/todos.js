@@ -1,7 +1,3 @@
-import {
-  updateTodoText
-} from '../utils/api'
-
 export const UPDATE_NEW_TODO_TEXT = 'UPDATE_NEW_TODO_TEXT'
 
 export const fetching = {
@@ -81,23 +77,6 @@ export const renamingTodo = {
     id,
     newText
   })
-}
-
-// Rename todo
-function renameTodo(id, text) {
-  return {
-    type: RENAME_TODO,
-    id,
-    text
-  }
-}
-
-export function handleRenameTodo(id, text) {
-  return (dispatch) => {
-    return updateTodoText(id, text)
-      .then(() => dispatch(renameTodo(id, text)))
-      .catch(error => console.error('Error:', error))
-  }
 }
 
 // Update new todo text

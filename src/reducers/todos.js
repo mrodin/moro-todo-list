@@ -1,10 +1,6 @@
 import { Map } from 'immutable'
 
 import {
-  RENAME_TODO
-} from '../actions/todos'
-
-import {
   loadingTodos,
   addingNewTodo,
   switchingTodo,

@@ -4,10 +4,6 @@ import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
-import {
-  handleRenameTodo
-} from '../actions/todos'
-
 import { getTodoById } from '../selectors/todos'
 
 import { switchingTodo, removingTodo, renamingTodo } from '../actions/todos'
