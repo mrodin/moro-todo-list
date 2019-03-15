@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleAddTodo } from '../actions/todos'
+import { addTodo } from '../actions/todos'
 
 class InputForm extends Component {
   state = {
@@ -19,7 +19,7 @@ class InputForm extends Component {
     const { dispatch } = this.props
 
     if (todoText.trim().length > 0) {
-      dispatch(handleAddTodo(todoText))
+      dispatch(addTodo(todoText))
     }
 
     this.setState(() => ({
