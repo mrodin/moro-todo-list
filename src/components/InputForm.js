@@ -5,8 +5,9 @@ import { addTodo, updateNewTodoText } from '../actions/todos'
 import { getNewTodoText } from '../selectors/todos'
 
 function InputForm(props) {
+  const { dispatch } = props
+
   const handleChange = e => {
-    const { dispatch } = props
     const { value } = e.target
 
     dispatch(updateNewTodoText(value))
@@ -15,7 +16,7 @@ function InputForm(props) {
   const handleSubmit = e => {
     e.preventDefault()
 
-    const { dispatch, newTodoText } = props
+    const { newTodoText } = props
 
     if (newTodoText.trim().length > 0) {
       dispatch(addTodo(newTodoText))

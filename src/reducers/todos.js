@@ -1,16 +1,19 @@
 import { Map } from 'immutable'
 
 import {
-  SET_TODOS,
   SET_TODO,
   SWITCH_TODO,
   REMOVE_TODO,
   RENAME_TODO
 } from '../actions/todos'
 
+import {
+  loadingTodos
+} from '../actions/todos'
+
 export default function todos(state = Map(), action) {
   switch (action.type) {
-    case SET_TODOS:
+    case loadingTodos.DONE:
       return Map(action.todos.map(todo => [todo.get('id'), todo]))
     case SET_TODO:
       return state.set(action.todo.id, Map(action.todo))

@@ -6,6 +6,29 @@ import {
   updateTodoText
 } from '../utils/api'
 
+export const fetching = {
+  START: 'FETCHING_START',
+  STOP: 'FETCHING_STOP',
+  start: () => ({
+    type: fetching.START
+  }),
+  stop: () => ({
+    type: fetching.STOP
+  })
+}
+
+export const loadingTodos = {
+  START: 'TODOS_LOADING_START',
+  DONE: 'TODOS_LOADING_DONE',
+  start: () => ({
+    type: loadingTodos.START
+  }),
+  done: (todos) => ({
+    type: loadingTodos.DONE,
+    todos
+  })
+}
+
 export const LOAD_TODOS = 'GET_TODOS'
 export const SET_TODOS = 'SET_TODOS'
 export const ADD_TODO = 'ADD_TODO'

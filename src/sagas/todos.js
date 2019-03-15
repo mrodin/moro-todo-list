@@ -17,14 +17,17 @@ import {
     saveTodo
 } from '../utils/api'
 
-function* rootSaga() {
-    yield takeEvery(LOAD_TODOS, handleTodosLoad)
-    yield takeEvery(ADD_TODO, handleAddTodo)
-}
+import {
+    fetching,
+    loadingTodos
+} from '../actions/todos'
 
-function* handleTodosLoad() {
+function* rootSaga() {
+    yield takeEvery(ADD_TODO, handleAddTodo)
+
     const todos = yield call(fetchTodos)
-    yield put(setTodos(todos))
+    yield put(loadingTodos.done(todos))
+    yield put(fetching.stop())
 }
 
 function* handleAddTodo() {

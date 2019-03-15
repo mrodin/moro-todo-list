@@ -1,13 +1,12 @@
 import {
-    LOAD_TODOS,
-    SET_TODOS
+    fetching
 } from '../actions/todos'
 
-export default function loading(state = false, action) {
+export default function loading(state = true, action) {
     switch (action.type) {
-        case LOAD_TODOS:
+        case fetching.START:
             return true
-        case SET_TODOS:
+        case fetching.STOP:
             return false
         default:
             return state
