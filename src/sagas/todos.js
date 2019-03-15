@@ -1,14 +1,15 @@
 import { takeEvery, put, call, select } from 'redux-saga/effects'
 
 import { getNewTodoText } from '../selectors/todos'
-import { fetching, loadingTodos, addingNewTodo, switchingTodo } from '../actions/todos'
-import { fetchTodos, saveTodo, checkTodo, uncheckTodo } from '../utils/api'
+import { fetching, loadingTodos, addingNewTodo, switchingTodo, removingTodo } from '../actions/todos'
+import { fetchTodos, saveTodo, checkTodo, uncheckTodo, deleteTodo } from '../utils/api'
 
 function* rootSaga() {
-  
+
   const todos = yield call(fetchTodos)
   yield takeEvery(addingNewTodo.START, handleAddTodo)
   yield takeEvery(switchingTodo.START, handleSwitchTodo)
+  yield takeEvery(removingTodo.START, handleRemoveTodo)
 
   yield put(loadingTodos.done(todos))
   yield put(fetching.stop())
@@ -30,6 +31,11 @@ function* handleSwitchTodo({ id, action }) {
     yield put(switchingTodo.done(id))
   }
 
+}
+
+function* handleRemoveTodo({ id }) {
+  yield call(deleteTodo, id)
+  yield put(removingTodo.done(id))
 }
 
 export default rootSaga

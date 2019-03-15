@@ -1,7 +1,8 @@
 import {
-  deleteTodo,
   updateTodoText
 } from '../utils/api'
+
+export const UPDATE_NEW_TODO_TEXT = 'UPDATE_NEW_TODO_TEXT'
 
 export const fetching = {
   START: 'FETCHING_START',
@@ -52,24 +53,19 @@ export const switchingTodo = {
   })
 }
 
-export const REMOVE_TODO = 'REMOVE_TODO'
 export const RENAME_TODO = 'RENAME_TODO'
-export const UPDATE_NEW_TODO_TEXT = 'UPDATE_NEW_TODO_TEXT'
 
-// Remove todo
-function removeTodo(id) {
-  return {
-    type: REMOVE_TODO,
+export const removingTodo = {
+  START: 'TODO_REMOVING_START',
+  DONE: 'TODO_REMOVING_DONE',
+  start: (id) => ({
+    type: removingTodo.START,
     id
-  }
-}
-
-export function handleRemoveTodo(id) {
-  return (dispatch) => {
-    return deleteTodo(id)
-      .then(() => dispatch(removeTodo(id)))
-      .catch(error => console.error('Error:', error))
-  }
+  }),
+  done: (id) => ({
+    type: removingTodo.DONE,
+    id
+  })
 }
 
 // Rename todo

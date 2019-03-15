@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { handleRemoveTodo } from '../actions/todos'
+import { removingTodo } from '../actions/todos'
 import { getTodos } from '../selectors/todos'
 
 function StatusBar(props) {
@@ -11,7 +11,7 @@ function StatusBar(props) {
     const { dispatch } = props
 
     todosCompleted.forEach(todo => {
-      dispatch(handleRemoveTodo(todo.get('id')))
+      dispatch(removingTodo.start(todo.get('id')))
     })
   }
 

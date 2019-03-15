@@ -1,18 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 import {
-  handleRemoveTodo,
   handleRenameTodo
 } from '../actions/todos'
 
-import { switchingTodo } from '../actions/todos'
-
 import { getTodoById } from '../selectors/todos'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { switchingTodo, removingTodo } from '../actions/todos'
+
 
 function Task(props) {
   const { dispatch } = props
@@ -29,9 +28,9 @@ function Task(props) {
   }
 
   const handleRemove = e => {
-    const { dispatch, taskId } = props
+    const { taskId } = props
 
-    dispatch(handleRemoveTodo(taskId))
+    dispatch(removingTodo.start(taskId))
   }
 
   const handleRename = e => {

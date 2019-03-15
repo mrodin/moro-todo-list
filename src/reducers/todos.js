@@ -1,14 +1,14 @@
 import { Map } from 'immutable'
 
 import {
-  REMOVE_TODO,
   RENAME_TODO
 } from '../actions/todos'
 
 import {
   loadingTodos,
   addingNewTodo,
-  switchingTodo
+  switchingTodo,
+  removingTodo
 } from '../actions/todos'
 
 export default function todos(state = Map(), action) {
@@ -19,7 +19,7 @@ export default function todos(state = Map(), action) {
       return state.set(action.todo.id, Map(action.todo))
     case switchingTodo.DONE:
       return state.setIn([action.id, 'completed'], !state.getIn([action.id, 'completed']))
-    case REMOVE_TODO:
+    case removingTodo.DONE:
       return state.delete(action.id)
     case RENAME_TODO:
       return state.setIn([action.id, 'text'], action.text)
