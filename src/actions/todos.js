@@ -1,5 +1,4 @@
 import {
-  saveTodo,
   checkTodo,
   uncheckTodo,
   deleteTodo,
@@ -29,50 +28,36 @@ export const loadingTodos = {
   })
 }
 
-export const LOAD_TODOS = 'GET_TODOS'
-export const SET_TODOS = 'SET_TODOS'
-export const ADD_TODO = 'ADD_TODO'
-export const SET_TODO = 'SET_TODO'
+export const addingNewTodo = {
+  START: 'TODO_ADDING_START',
+  DONE: 'TODO_ADDING_DONE',
+  start: () => ({
+    type: addingNewTodo.START
+  }),
+  done: (todo) => ({
+    type: addingNewTodo.DONE,
+    todo
+  })
+}
+
+export const switchingTodo = {
+  START: 'TODO_SWITCHING_START',
+  DONE: 'TODO_SWITCHING_DONE',
+  start: (id, action) => ({
+    type: switchingTodo.START,
+    id,
+    action
+  }),
+  done: (id) => ({
+    type: switchingTodo.DONE,
+    id
+  })
+}
+
 export const SWITCH_TODO = 'SWITCH_TODO'
 export const REMOVE_TODO = 'REMOVE_TODO'
 export const RENAME_TODO = 'RENAME_TODO'
 export const UPDATE_NEW_TODO_TEXT = 'UPDATE_NEW_TODO_TEXT'
-
-// Get all todos from API call
-export function loadTodos() {
-  return {
-    type: LOAD_TODOS
-  }
-}
-
-export function setTodos(todos) {
-  return {
-    type: SET_TODOS,
-    todos
-  }
-}
-
-// Add new todo
-export function addTodo() {
-  return {
-    type: ADD_TODO
-  }
-}
-
-export function setTodo(todo) {
-  return {
-    type: SET_TODO,
-    todo
-  }
-}
-
-export function handleAddTodo(text) {
-  return (dispatch) => {
-    return saveTodo(text)
-      .then(todo => dispatch(addTodo(todo)))
-      .catch(error => console.error('Error:', error))
-  }
-}
 
 // Switch todo
 function switchTodo(id) {

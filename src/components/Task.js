@@ -8,20 +8,25 @@ import {
   handleRemoveTodo,
   handleRenameTodo
 } from '../actions/todos'
+
+import { switchingTodo } from '../actions/todos'
+
 import { getTodoById } from '../selectors/todos'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 function Task(props) {
+  const { dispatch } = props
+
   const handleCheckboxChange = e => {
-    const { dispatch, taskId } = props
+    const { taskId } = props
     const { checked } = e.target
 
     if (checked) {
-      dispatch(handleCheckTodo(taskId))
+      dispatch(switchingTodo.start(taskId, 'complete'))
     } else {
-      dispatch(handleUncheckTodo(taskId))
+      dispatch(switchingTodo.start(taskId, 'incomplete'))
     }
   }
 

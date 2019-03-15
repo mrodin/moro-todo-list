@@ -1,39 +1,35 @@
 import { takeEvery, put, call, select } from 'redux-saga/effects'
 
 import { getNewTodoText } from '../selectors/todos'
-
-import {
-    LOAD_TODOS,
-    ADD_TODO
-} from '../actions/todos'
-
-import {
-    setTodos,
-    setTodo
-} from '../actions/todos'
-
-import {
-    fetchTodos,
-    saveTodo
-} from '../utils/api'
-
-import {
-    fetching,
-    loadingTodos
-} from '../actions/todos'
+import { fetching, loadingTodos, addingNewTodo, switchingTodo } from '../actions/todos'
+import { fetchTodos, saveTodo, checkTodo, uncheckTodo } from '../utils/api'
 
 function* rootSaga() {
-    yield takeEvery(ADD_TODO, handleAddTodo)
+  
+  const todos = yield call(fetchTodos)
+  yield takeEvery(addingNewTodo.START, handleAddTodo)
+  yield takeEvery(switchingTodo.START, handleSwitchTodo)
 
-    const todos = yield call(fetchTodos)
-    yield put(loadingTodos.done(todos))
-    yield put(fetching.stop())
+  yield put(loadingTodos.done(todos))
+  yield put(fetching.stop())
 }
 
 function* handleAddTodo() {
-    const todoText = yield select(getNewTodoText)
-    const todo = yield call(saveTodo, todoText)
-    yield put(setTodo(todo))
+  const todoText = yield select(getNewTodoText)
+  const todo = yield call(saveTodo, todoText)
+  yield put(addingNewTodo.done(todo))
+}
+
+function* handleSwitchTodo({ id, action }) {
+  if (action === 'complete') {
+    yield call(checkTodo, id)
+    yield put(switchingTodo.done(id))
+  }
+  if (action === 'incomplete') {
+    yield call(uncheckTodo, id)
+    yield put(switchingTodo.done(id))
+  }
+
 }
 
 export default rootSaga

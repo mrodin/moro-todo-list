@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { addTodo, updateNewTodoText } from '../actions/todos'
+import { addingNewTodo, updateNewTodoText } from '../actions/todos'
 import { getNewTodoText } from '../selectors/todos'
 
 function InputForm(props) {
@@ -19,7 +19,7 @@ function InputForm(props) {
     const { newTodoText } = props
 
     if (newTodoText.trim().length > 0) {
-      dispatch(addTodo(newTodoText))
+      dispatch(addingNewTodo.start(newTodoText))
       dispatch(updateNewTodoText(''))
     }
   }
