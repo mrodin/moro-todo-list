@@ -34,7 +34,7 @@ class TodoList extends Component {
 
 function mapStateToProps(state) {
   return {
-    tasks: getOrderedVisibleTodos(state).keySeq()
+    tasks: getOrderedVisibleTodos(state)
   }
 }
 

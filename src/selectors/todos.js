@@ -26,4 +26,5 @@ export const getOrderedVisibleTodos = createSelector(
   getVisibleTodos,
   (visibleTodos) => visibleTodos
     .sort((a, b) => b.get('createdDate') - a.get('createdDate'))
+    .keySeq()
 )
