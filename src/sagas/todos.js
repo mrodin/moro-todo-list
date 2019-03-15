@@ -1,4 +1,6 @@
-import { takeEvery, put, call } from 'redux-saga/effects'
+import { takeEvery, put, call, select } from 'redux-saga/effects'
+
+import { getNewTodoText } from '../selectors/todos'
 
 import {
     LOAD_TODOS,
@@ -25,7 +27,8 @@ function* handleTodosLoad() {
     yield put(setTodos(todos))
 }
 
-function* handleAddTodo({ todoText }) {
+function* handleAddTodo() {
+    const todoText = yield select(getNewTodoText)
     const todo = yield call(saveTodo, todoText)
     yield put(setTodo(todo))
 }

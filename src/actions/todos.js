@@ -13,6 +13,7 @@ export const SET_TODO = 'SET_TODO'
 export const SWITCH_TODO = 'SWITCH_TODO'
 export const REMOVE_TODO = 'REMOVE_TODO'
 export const RENAME_TODO = 'RENAME_TODO'
+export const UPDATE_NEW_TODO_TEXT = 'UPDATE_NEW_TODO_TEXT'
 
 // Get all todos from API call
 export function loadTodos() {
@@ -29,10 +30,9 @@ export function setTodos(todos) {
 }
 
 // Add new todo
-export function addTodo(todoText) {
+export function addTodo() {
   return {
-    type: ADD_TODO,
-    todoText
+    type: ADD_TODO
   }
 }
 
@@ -52,7 +52,6 @@ export function handleAddTodo(text) {
 }
 
 // Switch todo
-
 function switchTodo(id) {
   return {
     type: SWITCH_TODO,
@@ -77,7 +76,6 @@ export function handleUncheckTodo(id) {
 }
 
 // Remove todo
-
 function removeTodo(id) {
   return {
     type: REMOVE_TODO,
@@ -94,7 +92,6 @@ export function handleRemoveTodo(id) {
 }
 
 // Rename todo
-
 function renameTodo(id, text) {
   return {
     type: RENAME_TODO,
@@ -108,5 +105,13 @@ export function handleRenameTodo(id, text) {
     return updateTodoText(id, text)
       .then(() => dispatch(renameTodo(id, text)))
       .catch(error => console.error('Error:', error))
+  }
+}
+
+// Update new todo text
+export function updateNewTodoText(todoText) {
+  return {
+    type: UPDATE_NEW_TODO_TEXT,
+    todoText
   }
 }
