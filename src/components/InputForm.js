@@ -1,46 +1,47 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { handleAddTodo } from '../actions/todos'
 
-class InputForm extends Component {
-  state = {
-    todoText: ''
+import { addingNewTodo, updateNewTodoText } from '../actions/todos'
+import { getNewTodoText } from '../selectors/todos'
+
+function InputForm(props) {
+  const { dispatch } = props
+
+  const handleChange = e => {
+    const { value } = e.target
+
+    dispatch(updateNewTodoText(value))
   }
 
-  handleChange = e => {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
-  }
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault()
 
-    const { todoText } = this.state
-    const { dispatch } = this.props
+    const { newTodoText } = props
 
-    if (todoText.trim().length > 0) {
-      dispatch(handleAddTodo(todoText))
+    if (newTodoText.trim().length > 0) {
+      dispatch(addingNewTodo.start(newTodoText))
+      dispatch(updateNewTodoText(''))
     }
-
-    this.setState(() => ({
-      todoText: ''
-    }))
   }
 
-  render() {
-    return (
-      <form className='input-form' onSubmit={this.handleSubmit}>
-        <input
-          type='text'
-          placeholder='What needs to be done?'
-          autoComplete='off'
-          value={this.state.todoText}
-          name='todoText'
-          onChange={this.handleChange}
-        />
-      </form>
-    )
+  return (
+    <form className='input-form' onSubmit={handleSubmit}>
+      <input
+        type='text'
+        placeholder='What needs to be done?'
+        autoComplete='off'
+        value={props.todoText}
+        name='todoText'
+        onChange={handleChange}
+      />
+    </form>
+  )
+}
+
+function mapStateToProps(state) {
+  return {
+    newTodoText: getNewTodoText(state)
   }
 }
 
-export default connect()(InputForm)
+export default connect(mapStateToProps)(InputForm)

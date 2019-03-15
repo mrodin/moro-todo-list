@@ -1,100 +1,89 @@
-import { showLoading, hideLoading } from 'react-redux-loading'
-
 import {
-  getTodos,
-  saveTodo,
-  checkTodo,
-  uncheckTodo,
-  deleteTodo,
   updateTodoText
 } from '../utils/api'
 
-export const RECEIVE_TODOS = 'RECEIVE_TODOS'
-export const ADD_TODO = 'ADD_TODO'
-export const SWITCH_TODO = 'SWITCH_TODO'
-export const REMOVE_TODO = 'REMOVE_TODO'
+export const UPDATE_NEW_TODO_TEXT = 'UPDATE_NEW_TODO_TEXT'
+
+export const fetching = {
+  START: 'FETCHING_START',
+  STOP: 'FETCHING_STOP',
+  start: () => ({
+    type: fetching.START
+  }),
+  stop: () => ({
+    type: fetching.STOP
+  })
+}
+
+export const loadingTodos = {
+  START: 'TODOS_LOADING_START',
+  DONE: 'TODOS_LOADING_DONE',
+  start: () => ({
+    type: loadingTodos.START
+  }),
+  done: (todos) => ({
+    type: loadingTodos.DONE,
+    todos
+  })
+}
+
+export const addingNewTodo = {
+  START: 'TODO_ADDING_START',
+  DONE: 'TODO_ADDING_DONE',
+  start: () => ({
+    type: addingNewTodo.START
+  }),
+  done: (todo) => ({
+    type: addingNewTodo.DONE,
+    todo
+  })
+}
+
+export const switchingTodo = {
+  START: 'TODO_SWITCHING_START',
+  DONE: 'TODO_SWITCHING_DONE',
+  start: (id, action) => ({
+    type: switchingTodo.START,
+    id,
+    action
+  }),
+  done: (id) => ({
+    type: switchingTodo.DONE,
+    id
+  })
+}
+
 export const RENAME_TODO = 'RENAME_TODO'
 
-// Get all todos
-function receiveTodos(todos) {
-  return {
-    type: RECEIVE_TODOS,
-    todos
-  }
-}
-
-export function handleReceiveTodos() {
-  return (dispatch) => {
-    dispatch(showLoading())
-    return getTodos()
-      .then(({ todos }) => {
-        dispatch(receiveTodos(todos))
-        dispatch(hideLoading())
-      })
-      .catch(error => console.error('Error:', error))
-  }
-}
-
-// Add new todo
-function addTodo(todo) {
-  return {
-    type: ADD_TODO,
-    todo
-  }
-}
-
-export function handleAddTodo(text) {
-  return (dispatch) => {
-    return saveTodo(text)
-      .then(todo => dispatch(addTodo(todo)))
-      .catch(error => console.error('Error:', error))
-  }
-}
-
-// Switch todo
-
-function switchTodo(id) {
-  return {
-    type: SWITCH_TODO,
+export const removingTodo = {
+  START: 'TODO_REMOVING_START',
+  DONE: 'TODO_REMOVING_DONE',
+  start: (id) => ({
+    type: removingTodo.START,
     id
-  }
-}
-
-export function handleCheckTodo(id) {
-  return (dispatch) => {
-    return checkTodo(id)
-      .then(todo => dispatch(switchTodo(todo.id)))
-      .catch(error => console.error('Error:', error))
-  }
-}
-
-export function handleUncheckTodo(id) {
-  return (dispatch) => {
-    return uncheckTodo(id)
-      .then(todo => dispatch(switchTodo(todo.id)))
-      .catch(error => console.error('Error:', error))
-  }
-}
-
-// Remove todo
-
-function removeTodo(id) {
-  return {
-    type: REMOVE_TODO,
+  }),
+  done: (id) => ({
+    type: removingTodo.DONE,
     id
-  }
+  })
 }
 
-export function handleRemoveTodo(id) {
-  return (dispatch) => {
-    return deleteTodo(id)
-      .then(() => dispatch(removeTodo(id)))
-      .catch(error => console.error('Error:', error))
-  }
+export const renamingTodo = {
+  START: 'TODO_RENAMING_START',
+  DONE: 'TODO_RENAMING_DONE',
+  start: (id, newText) => ({
+    type: renamingTodo.START,
+    id,
+    newText
+  }),
+  done: (id, newText) => ({
+    type: renamingTodo.DONE,
+    id,
+    newText
+  })
 }
 
 // Rename todo
-
 function renameTodo(id, text) {
   return {
     type: RENAME_TODO,
@@ -108,5 +97,13 @@ export function handleRenameTodo(id, text) {
     return updateTodoText(id, text)
       .then(() => dispatch(renameTodo(id, text)))
       .catch(error => console.error('Error:', error))
+  }
+}
+
+// Update new todo text
+export function updateNewTodoText(todoText) {
+  return {
+    type: UPDATE_NEW_TODO_TEXT,
+    todoText
   }
 }

@@ -3,6 +3,7 @@ import { createSelector } from 'reselect'
 export const getVisibilityFiler = (state) => state.get('visibilityFilter')
 export const getTodos = (state) => state.get('todos')
 export const getTodoById = (state, id) => state.getIn(['todos', id])
+export const getNewTodoText = (state) => state.get('newTodoText')
 
 const getVisibleTodos = createSelector(
   getVisibilityFiler,

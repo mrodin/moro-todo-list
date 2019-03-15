@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { handleCheckTodo, handleUncheckTodo } from '../actions/todos'
+import { switchingTodo } from '../actions/todos'
 import { getTodos } from '../selectors/todos'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -18,9 +18,9 @@ function InputBar(props) {
     const incompleteTodos = todos.filter(todo => todo.get('completed') === false)
 
     if (incompleteTodos.size === 0) {
-      todos.forEach(todo => dispatch(handleUncheckTodo(todo.get('id'))))
+      todos.forEach(todo => dispatch(switchingTodo.start(todo.get('id'), 'incomplete')))
     } else {
-      incompleteTodos.forEach(todo => dispatch(handleCheckTodo(todo.get('id'))))
+      incompleteTodos.forEach(todo => dispatch(switchingTodo.start(todo.get('id'), 'complete')))
     }
   }
 

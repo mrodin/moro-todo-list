@@ -1,43 +1,45 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
-import {
-  handleCheckTodo,
-  handleUncheckTodo,
-  handleRemoveTodo,
-  handleRenameTodo
-} from '../actions/todos'
-import { getTodoById } from '../selectors/todos'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
+import {
+  handleRenameTodo
+} from '../actions/todos'
+
+import { getTodoById } from '../selectors/todos'
+
+import { switchingTodo, removingTodo, renamingTodo } from '../actions/todos'
+
+
 function Task(props) {
+  const { dispatch } = props
+
   const handleCheckboxChange = e => {
-    const { dispatch, taskId } = props
+    const { taskId } = props
     const { checked } = e.target
 
     if (checked) {
-      dispatch(handleCheckTodo(taskId))
+      dispatch(switchingTodo.start(taskId, 'complete'))
     } else {
-      dispatch(handleUncheckTodo(taskId))
+      dispatch(switchingTodo.start(taskId, 'incomplete'))
     }
   }
 
   const handleRemove = e => {
-    const { dispatch, taskId } = props
+    const { taskId } = props
 
-    dispatch(handleRemoveTodo(taskId))
+    dispatch(removingTodo.start(taskId))
   }
 
   const handleRename = e => {
-    const { dispatch, taskId } = props
+    const { taskId } = props
     const originalText = props.task.get('text')
     const newText = prompt('Please enter name', originalText)
 
     if (!!newText) {
-      dispatch(handleRenameTodo(taskId, newText))
+      dispatch(renamingTodo.start(taskId, newText))
     }
   }
 

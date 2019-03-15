@@ -3,11 +3,11 @@ import { fromJS } from 'immutable'
 const API_ENDPOINT = 'http://localhost:8080/todos'
 
 // Returns all todos
-export function getTodos() {
+export function fetchTodos() {
   return fetch(API_ENDPOINT)
     .then(_handleErrors)
     .then(response => response.json())
-    .then(todoList => ({ todos: fromJS(todoList) }))
+    .then(todoList => (fromJS(todoList)))
     .catch(error => console.error('Error:', error))
 }
 
