@@ -10,7 +10,7 @@ import {
 
 import { getTodoById } from '../selectors/todos'
 
-import { switchingTodo, removingTodo } from '../actions/todos'
+import { switchingTodo, removingTodo, renamingTodo } from '../actions/todos'
 
 
 function Task(props) {
@@ -34,12 +34,12 @@ function Task(props) {
   }
 
   const handleRename = e => {
-    const { dispatch, taskId } = props
+    const { taskId } = props
     const originalText = props.task.get('text')
     const newText = prompt('Please enter name', originalText)
 
     if (!!newText) {
-      dispatch(handleRenameTodo(taskId, newText))
+      dispatch(renamingTodo.start(taskId, newText))
     }
   }
 

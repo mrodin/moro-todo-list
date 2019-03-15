@@ -8,7 +8,8 @@ import {
   loadingTodos,
   addingNewTodo,
   switchingTodo,
-  removingTodo
+  removingTodo,
+  renamingTodo
 } from '../actions/todos'
 
 export default function todos(state = Map(), action) {
@@ -21,8 +22,8 @@ export default function todos(state = Map(), action) {
       return state.setIn([action.id, 'completed'], !state.getIn([action.id, 'completed']))
     case removingTodo.DONE:
       return state.delete(action.id)
-    case RENAME_TODO:
-      return state.setIn([action.id, 'text'], action.text)
+    case renamingTodo.DONE:
+      return state.setIn([action.id, 'text'], action.newText)
     default:
       return state
   }

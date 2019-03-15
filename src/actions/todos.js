@@ -68,6 +68,21 @@ export const removingTodo = {
   })
 }
 
+export const renamingTodo = {
+  START: 'TODO_RENAMING_START',
+  DONE: 'TODO_RENAMING_DONE',
+  start: (id, newText) => ({
+    type: renamingTodo.START,
+    id,
+    newText
+  }),
+  done: (id, newText) => ({
+    type: renamingTodo.DONE,
+    id,
+    newText
+  })
+}
+
 // Rename todo
 function renameTodo(id, text) {
   return {
